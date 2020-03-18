@@ -44,6 +44,42 @@
 */
 
 /*
+	2.) Milyen változók vannak a C++-ban?
+
+	Milyen alap változók vannak?:
+	bool - 1 bit, igaz/hamis
+	int - egész szám
+	string - szöveg
+	
+	Példák értékadásra:
+
+	bool ferfi = false;
+
+	int eletKor = 21;
+
+	string nev = "Gipsz Jakab";
+
+	( = értékadó operátor)
+
+	Az Arudinonál az int-et ritkát használjuk, sokkal inkább szeretjük ezeket:
+	(Azért nemjó, mert nem tudod, hogy mennyi helyet foglal éppen[16 bit, 32 bit, vagy 64 bit])
+	Tehát ezeket használjuk:
+	---
+	uint8_t eletkor = 21;
+	u ==> unsigned (Azt jelenti, hogy csak pozitív lehet az érték, mert nincs előjel bit)
+	int ==> integer ( egész szám)
+	8_t ==> 8 bit hosszúságú(a max érték 2^8-on)
+	---
+	uint16_t szuletesiEv = 1999;
+	u ==> unsigned (Azt jelenti, hogy csak pozitív lehet az érték, mert nincs előjel bit)
+	int ==> Integer ( egész szám)
+	16_t ==> 16 bit hosszúságú(a max érték 2^16-on)
+	---
+	Látszik, hogy fontos, hogy milyen változó mennyi helyet foglal. Fölösleges 16 bit egy életkornak,
+	hiszen 255 nél sose lesz senki idősebb
+*/
+
+/*
 	3.) Mi ez a C++, hogyan működik?
 	
 	A C++ a C ből fejlődött ki, egyedisége abban rejlik, hogy lehet benne több paradigma szerint is programozni
@@ -129,6 +165,7 @@
 
 void setup()
 {
+	uint8_t value = 10;
 	/*
 		Ez a függvény az MC beindításakor fog lefutni 1-szer és utána soha többet.
 		Sok mindent lehet csinálni benne, erről majd később amikor ténylegesen az MC -re írunk kódot.
