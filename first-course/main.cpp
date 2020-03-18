@@ -12,6 +12,10 @@
     Mindent kommentelj fel, amit éremesnek találsz rá.
 */
 
+//	Szeretnénk használni az Arduino cég által elkészített fügvénytárat is,
+//	ezért kell ez
+#include <Arduino.h>
+
 /*
 	1.) Hogyan működnek ezek a mikrokontrollerek?
     
@@ -50,6 +54,7 @@
 	bool - 1 bit, igaz/hamis
 	int - egész szám
 	string - szöveg
+	char - karakter
 	
 	Példák értékadásra:
 
@@ -58,6 +63,8 @@
 	int eletKor = 21;
 
 	string nev = "Gipsz Jakab";
+
+	char osztalyAzonosito = 'C';
 
 	( = értékadó operátor)
 
@@ -76,7 +83,9 @@
 	16_t ==> 16 bit hosszúságú(a max érték 2^16-on)
 	---
 	Látszik, hogy fontos, hogy milyen változó mennyi helyet foglal. Fölösleges 16 bit egy életkornak,
-	hiszen 255 nél sose lesz senki idősebb
+	hiszen 255 nél sose lesz senki idősebb.
+
+	Sok féle változó van még, de ezekkel el lehet indulni.
 */
 
 /*
@@ -159,25 +168,93 @@
 
 #define MC = "mikrokontroller";
 
-//Kommentben nem működik a #define de a vicc kedvéért csináltam egy makrót, hogy ne kelljen sokat írnom.
+//	Kommentben nem működik a #define de a vicc kedvéért csináltam egy makrót, hogy ne kelljen sokat írnom.
 
-//2 függvény van, ami az MC világban mindig így lesz a setup és a loop
+//	2 függvény van, ami az MC világban mindig így lesz a setup és a loop
+
+//	A Példákban egyszerű függvényeket fogunk írni és megismerkedünk már megírt függvényekkel és azok használatával
+
+/*
+Példa[1] Összead Egyik féle megvalósítás
+#################################################
+paraméterek:(egész (egyik tag), egész(másik tag))
+visszatérési érték: egész (összeg)
+*/
+int OsszeadElso(int elsoSzam, int masodikSzam) {
+	//	Kimenjtük egy változóba az összeget
+	int Szumma = elsoSzam + masodikSzam;
+	//	Visszatérünk az össszeggel
+	return Szumma;
+}
+/*
+#################################################
+*/
+
+/*
+Példa[2] Összead Második féle megvalósítás
+#################################################
+paraméterek:(egész (egyik tag), egész(másik tag))
+visszatérési érték: egész (összeg)
+info:	nem hozunk létre egy másik változót, hanem egyből az összeget adjuk vissza (kevesebb memória)
+*/
+int OsszeadMasodik(int elsoSzam, int masodikSzam) {
+	//	Visszatérünk az össszeggel
+	return elsoSzam + masodikSzam;
+}
+/*
+#################################################
+*/
+
+/*
+Példa[3] Összead 8bites megvalósítás
+#################################################
+paraméterek:(8bit egész (egyik tag), 8bit egész(másik tag))
+visszatérési érték: 16bit egész (összeg)
+info:	nem hozunk létre egy másik változót, hanem egyből az összeget adjuk vissza (kevesebb memória)
+illetve 2 darab 8 bites szám összege lehet 16 bites szám is.
+*/
+uint16_t OsszeadNyolcBit(uint8_t elsoSzam, uint8_t masodikSzam) {
+	//	Visszatérünk az össszeggel
+	return elsoSzam + masodikSzam;
+}
+/*
+#################################################
+*/
+
+#define ledPin = 5;
 
 void setup()
 {
-	uint8_t value = 10;
 	/*
 		Ez a függvény az MC beindításakor fog lefutni 1-szer és utána soha többet.
 		Sok mindent lehet csinálni benne, erről majd később amikor ténylegesen az MC -re írunk kódot.
 	*/
+	/*
+		Kimondottan Arduino specifikus függvény, a soros portot, 
+		amit az USB kábel az MC-n állítja be 9600 as "sebességre"
+		ezek után már lehet használni kommunikációra ezt a portot
+	*/
+	Serial.begin(9600);
+	/*
+		Kimondottan Arduino specifikus függvény, egy pin-t 
+		tudunk beállítani kimeneti, vagy bemenetinek, alapvetően mind bemeneti,
+		viszont érdemes mindig beállítani ettől függetlenül.
+		bemenet = INPUT
+		kimenet = OUTPUT
+	*/
+	Serial.print
+	pinMode(ledPin, OUTPUT);
 }
 
 void loop()
 {
+	Serial.println("valami");
 	/*
 		Ez pedig a setup() lefutása után végtelenszer fog futni, amíg ki nem kapcsoljuk az MC -t.
 		A loop jelentése ciklus.
 	*/
+
+
     //delay(10); // Delay a little bit to improve simulation performance
 
 }
