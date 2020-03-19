@@ -223,6 +223,9 @@ uint16_t OsszeadNyolcBit(uint8_t elsoSzam, uint8_t masodikSzam) {
 
 #define ledPin = 5;
 
+uint8_t counter = 0;
+uint8_t 
+
 void setup()
 {
 	/*
@@ -242,17 +245,16 @@ void setup()
 		bemenet = INPUT
 		kimenet = OUTPUT
 	*/
-	Serial.print
 	pinMode(ledPin, OUTPUT);
 }
 
 void loop()
 {
-	Serial.println("valami");
 	/*
 		Ez pedig a setup() lefutása után végtelenszer fog futni, amíg ki nem kapcsoljuk az MC -t.
 		A loop jelentése ciklus.
 	*/
+	Serial.println("valami");
 
 
     //delay(10); // Delay a little bit to improve simulation performance
