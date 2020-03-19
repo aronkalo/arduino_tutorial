@@ -41,9 +41,6 @@ int maxNumberInEightBit = pow(2, 8) - 1;
 //  ---
 //  2-es feladatban szükséges az irány eldöntéséhez.
 bool direction = 0;
-
-uint8_t firstNumber = 0;
-uint8_t secondNumber = 0;
 /*
 ---------------------------
     Függvények, Metódusok:
@@ -56,10 +53,9 @@ uint8_t secondNumber = 0;
 //  Negáljuk a LED értékét az eddigi állapotához képest.
 void negatePin(uint8_t pinNumber, uint16_t miliseconds) {
     //  A digitalRead függvénnyel lekérdezzük a LED jelenlegi értékét
-    bool switchedOn = digitalRead(pinNumber);
-    Serial.println(switchedOn);
+    int switchedOn = digitalRead(pinNumber);
     //  Ha be van kapcsolva akkor kikapcsoljuk, ha nem akkor bekapcsoljuk.
-    if (switchedOn)
+    if (switchedOn == 1)
     {
         digitalWrite(pinNumber, LOW);
     }
@@ -152,26 +148,26 @@ void runningLight(uint8_t firstPin, uint8_t pinCount, uint16_t miliseconds) {
 
 //  MASODIK FELADAT KERETE
 void progressBar(uint8_t firstPin, uint8_t pinCount, uint8_t finishedPin, uint16_t miliseconds) {
-/*
-    Feladat:
-    Folyamatjelzõt készítünk, amelyik, hogyha kész akkor a finish LED kigyullad.
-    Nem probléma, ha balról telik jobbra tehát:
-    00000001 ==> 00000011 ==> 00000111 ==> 00001111 ... ha megtelik akkor a következõ lépésben finish legyen
-    Ha finish volt akkor kezdõdjön újra a folyamat.
-    Szükség lesz : ciklusra, elágazásra (if, else) is
-    Feladat:
-        1. nézzük meg melyik ledek vannak bekapcsolva (valszeg balról jobbra lesznek bekapcsolva, vagy egy sem)
-        2. ha megvan legnagyobb pin számú bekapcsolt akkor a nála egyel nagyobbat kapcsoljuk be, ha nem õ a legnagyobb.
-        3. ha nincs egy sem bekapcsolva akkor elkell kezdeni balról a kapcsolást
-        4. ha végetért akkor mindent kikell kapcsolni ami bevolt kapcsolva
-        5. !!!!!!!!! a végére egy delay( miliszekundum ) kell, mert különben megbolondul
-    Hasonló a futófényhez, valamennyivel könnyeb, mert nemkell az irányt nézni.
+    /*
+        Feladat:
+        Folyamatjelzõt készítünk, amelyik, hogyha kész akkor a finish LED kigyullad.
+        Nem probléma, ha balról telik jobbra tehát:
+        00000001 ==> 00000011 ==> 00000111 ==> 00001111 ... ha megtelik akkor a következõ lépésben finish legyen
+        Ha finish volt akkor kezdõdjön újra a folyamat.
+        Szükség lesz : ciklusra, elágazásra (if, else) is
+        Feladat:
+            1. nézzük meg melyik ledek vannak bekapcsolva (valszeg balról jobbra lesznek bekapcsolva, vagy egy sem)
+            2. ha megvan legnagyobb pin számú bekapcsolt akkor a nála egyel nagyobbat kapcsoljuk be, ha nem õ a legnagyobb.
+            3. ha nincs egy sem bekapcsolva akkor elkell kezdeni balról a kapcsolást
+            4. ha végetért akkor mindent kikell kapcsolni ami bevolt kapcsolva
+            5. !!!!!!!!! a végére egy delay( miliszekundum ) kell, mert különben megbolondul
+        Hasonló a futófényhez, valamennyivel könnyeb, mert nemkell az irányt nézni.
 
-    Hajrá.
-*/
-//  KÓD ELEJE...
+        Hajrá.
+    */
+    //  KÓD ELEJE...
 
-//  KÓD VÉGE
+    //  KÓD VÉGE
 }
 
 
@@ -185,7 +181,8 @@ void setPinDirection(uint8_t firstPin, uint8_t pinCount, bool mode) {
 
 void setup()
 {
-    setPinDirection(firstPin, pinCount + 1, 1);
+    setPinDirection(firstPin, pinCount, 1);
+    setPinDirection(errorPin, 1, 1);
     //  A Soros Monitor használatához szükséges, sebességet állítunk be
     Serial.begin(9600);
 }
@@ -199,12 +196,12 @@ void loop()
             nehogy egyik a másik mûködését megzavarja
     */
     //  1.) A:
-    negatePin(errorPin, 50);
+    negatePin(errorPin, 500);
     //  1.) B: (Kommentezni 1/A ezt Kikommentezni)
-    //turnOnAndOffPin(errorPin, 100);
+    //turnOnAndOffPin(errorPin, 200);
     //---
     //  2.) A: (Kommentezni az elso 2 függvényt! Ez pedig Kikommentezni)
-    //runningLight(firstPin, pinCount, 100);
+    //runningLight(firstPin, pinCount, 150);
     //  2.) B: (Komment 2/A ezt kikommentezni)
-    //progressBar(firstPin, pinCount, errorPin, 100);
+    //progressBar(firstPin, pinCount, errorPin, 200);
 }
