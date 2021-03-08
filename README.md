@@ -1,5 +1,7 @@
 # Arduino Tutorial
-[Inactive Project]
+##[Inactive Project]
+
+
 A start course for total begginers in programming for Arduino and C++, written in Hungarian language.
 Every course focusing on the Arduino Framework
 
